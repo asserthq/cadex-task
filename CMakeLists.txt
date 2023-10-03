@@ -6,8 +6,8 @@ project(cadex-task)
 
 include(FetchContent)
 FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/a6d7fa8c0cebaa8b493a1cecdfa05018f6adc8df.zip
+    googletest
+    URL https://github.com/google/googletest/archive/a6d7fa8c0cebaa8b493a1cecdfa05018f6adc8df.zip
 )
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
