@@ -1,18 +1,22 @@
 #pragma once
 
 template<class T>
-struct Vector3D
+struct Vec3
 {
     T x;
     T y;
     T z;
 
-    vector3D() : x(0), y(0), z(0) {}
-    explicit Vector3D(T x, T y, T z) : x(x), y(y), z(y) {}
-    vector3D(const vector3D&) = default;
-    vector3D(vector3D&&) noexcept = default;
-    vector3D& operator=(const vector3D&) = default;
-    vector3D& operator=(vector3D&&) noexcept = default;
+    Vec3() : x(0), y(0), z(0) {}
+    Vec3(T x, T y, T z) : x(x), y(y), z(z) {}
+    Vec3(const Vec3&) = default;
+    Vec3(Vec3&&) noexcept = default;
+    Vec3& operator=(const Vec3&) = default;
+    Vec3& operator=(Vec3&&) noexcept = default;
 
-    ~vector3D() = default;
+    ~Vec3() = default;
+
+    auto operator<=>(const Vec3&) const = default;
 };
+
+using Vec3f = Vec3<float>;
