@@ -4,11 +4,8 @@
 class ICurve
 {
 public:
-    using PointTy = Vector3D<float>;
-
-public:
     virtual ~ICurve() = default;
 
-    virtual PointTy Point(float t) const = 0;
-    virtual PointTy Derivative(float t) const = 0;
+    virtual Vec3f Point(float t) const = 0;
+    virtual Vec3f Derivative(float t) const = 0;
 };
