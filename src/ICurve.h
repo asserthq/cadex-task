@@ -11,5 +11,5 @@ public:
     virtual ~ICurve() = default;
 
     virtual PointTy Point(ParamTy t) = 0;
-    virtual ParamTy Derivative(ParamTy t) = 0;
+    virtual PointTy Derivative(ParamTy t) = 0;
 };
