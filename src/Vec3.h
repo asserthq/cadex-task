@@ -16,7 +16,8 @@ struct Vec3
 
     ~Vec3() = default;
 
-    auto operator<=>(const Vec3&) const = default;
+    bool operator==(const Vec3&) const = default;
 };
 
 using Vec3f = Vec3<float>;
+using Vec3d = Vec3<double>;
