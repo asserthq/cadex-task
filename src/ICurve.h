@@ -1,5 +1,5 @@
 #pragma once
-#include "Vector3D.h"
+#include "Vec3.h"
 
 class ICurve
 {
