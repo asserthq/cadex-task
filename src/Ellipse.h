@@ -15,6 +15,7 @@ public:
 
     float RadiusX() const { return m_radX; }
     float RadiusY() const { return m_radY; }
+    auto Radius() const { return std::pair(m_radX, m_radY); }
 
     void SetRadiusX(float x_rad) { m_radX = std::abs(x_rad); }
     void SetRadiusY(float y_rad) { m_radY = std::abs(y_rad); }

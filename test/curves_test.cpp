@@ -192,6 +192,7 @@ TEST(EllipseTest, BasicTest)
 
     ASSERT_EQ(e1.RadiusX(), 10.f);
     ASSERT_EQ(e1.RadiusY(), 20.f);
+    ASSERT_EQ(e1.Radius(), std::pair(10.f, 20.f));
     ASSERT_TRUE(e1 == e2);
     ASSERT_EQ(e1, e2);
 
