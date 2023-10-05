@@ -3,6 +3,7 @@
 
 #include "Vec3.h"
 #include "Circle.h"
+#include "Ellipse.h"
 
 #include <numbers>
 #include <cmath>
@@ -64,9 +65,11 @@ TEST(Vec3_Test, CopyTest)
 
 TEST(CircleTest, BasicTest)
 {
+    auto def = Circle{};
+    ASSERT_EQ(def.Radius(), 1.f);
+
     Circle c1(100.f);
     auto c2 = Circle(-100.f);
-    auto x = c1 == c2;
 
     ASSERT_EQ(c1.Radius(), 100.f);
     ASSERT_TRUE(c1 == c2);
@@ -82,7 +85,6 @@ TEST(CircleTest, PointTest)
 {
     float rad = 100.f;
     Circle c(rad);
-    ASSERT_EQ(c.Radius(), 100.f);
 
     ASSERT_THAT(
         c.Point(0.f), 
@@ -172,6 +174,133 @@ TEST(CircleTest, DerivativeTest)
             Vec3f(
                 rad * (std::sqrt(2)/2), 
                 rad * (std::sqrt(2)/2), 
+                0.f
+            ),
+            0.001f
+        )
+    );
+}
+
+TEST(EllipseTest, BasicTest)
+{
+    auto def = Ellipse{};
+    ASSERT_EQ(def.RadiusX(), 1.f);
+    ASSERT_EQ(def.RadiusY(), 1.f);
+
+    Ellipse e1(10.f, -20.f);
+    auto e2 = Ellipse(10.f, 20.f);
+
+    ASSERT_EQ(e1.RadiusX(), 10.f);
+    ASSERT_EQ(e1.RadiusY(), 20.f);
+    ASSERT_TRUE(e1 == e2);
+    ASSERT_EQ(e1, e2);
+
+    e2 = Ellipse(50.f, 70.f);
+    ASSERT_TRUE(e1 != e2);
+    e2.SetRadius(30.f, 40.f);
+    ASSERT_EQ(e2.RadiusX(), 30.f);
+    ASSERT_EQ(e2.RadiusY(), 40.f);
+
+    e1.SetRadiusX(30.f);
+    e1.SetRadiusY(40.f);
+    ASSERT_TRUE(e1 == e2);
+} 
+
+TEST(EllipseTest, PointTest) 
+{
+    float rx = 5.f;
+    float ry = 7.f;
+    Ellipse e(rx, ry);
+
+    ASSERT_THAT(
+        e.Point(0.f), 
+        Vec3f_Near( 
+            Vec3f(
+                rx, 
+                0.f, 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+    
+    ASSERT_THAT(
+        e.Point(pi * 2.f), 
+        Vec3f_Near( 
+            e.Point(0.f), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        e.Point(pi), 
+        Vec3f_Near( 
+            Vec3f(
+                -rx, 
+                0.f, 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        e.Point(-pi / 2.f), 
+        Vec3f_Near( 
+            Vec3f(
+                0.f, 
+                -ry, 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        e.Point((4.f*pi) + (4.f*pi / 3.f)), 
+        Vec3f_Near( 
+            Vec3f(
+                rx * (-0.5f), 
+                ry * (-std::sqrt(3)/2.f), 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+}
+
+TEST(EllipseTest, DerivativeTest)
+{
+    float rx = 5.f;
+    float ry = 7.f;
+    Ellipse e(rx, ry);
+
+    ASSERT_THAT(
+        e.Derivative(0.f), 
+        Vec3f_Near( 
+            Vec3f(
+                0.f, 
+                ry, 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+    
+    ASSERT_THAT(
+        e.Derivative(pi*20.f), 
+        Vec3f_Near( 
+            e.Derivative(0.f),
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        e.Derivative(-pi/4.f - pi*100.f), 
+        Vec3f_Near( 
+            Vec3f(
+                rx * (std::sqrt(2)/2), 
+                ry * (std::sqrt(2)/2), 
                 0.f
             ),
             0.001f
