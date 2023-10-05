@@ -17,7 +17,7 @@ FetchContent_MakeAvailable(googletest)
 
 ##########
 
-add_library(curves STATIC src/Circle.cpp src/Circle.h src/ICurve.h src/Vec3.h)
+add_library(curves SHARED src/Circle.cpp src/Circle.h src/ICurve.h src/Vec3.h)
 add_executable(sandbox src/main.cpp)
 target_link_libraries(sandbox curves)
 
