@@ -17,7 +17,7 @@ public:
     float RadiusY() const { return m_radY; }
 
     void SetRadiusX(float x_rad) { m_radX = std::abs(x_rad); }
-    void SetRadiusX(float y_rad) { m_radY = std::abs(y_rad); }
+    void SetRadiusY(float y_rad) { m_radY = std::abs(y_rad); }
     void SetRadius(float x_rad, float y_rad) { m_radX = std::abs(x_rad); m_radY = std::abs(y_rad); }
 
     bool operator==(const Ellipse& other) const 
