@@ -16,7 +16,7 @@ public:
     float Step() const { return m_step; }
     void SetStep(float step) { m_step = step; }
 
-    bool operator==(const Helix& other)
+    bool operator==(const Helix& other) const
     {
         return  m_rad == other.m_rad &&
                 m_step == other.m_step;
