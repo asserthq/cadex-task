@@ -20,6 +20,12 @@ public:
     void SetRadiusX(float y_rad) { m_radY = std::abs(y_rad); }
     void SetRadius(float x_rad, float y_rad) { m_radX = std::abs(x_rad); m_radY = std::abs(y_rad); }
 
+    bool operator==(const Ellipse& other) const 
+    { 
+        return  m_radX == other.m_radX && 
+                m_radY == other.m_radY; 
+    }
+
 protected:
     float m_radX{1.f};
     float m_radY{1.f};
