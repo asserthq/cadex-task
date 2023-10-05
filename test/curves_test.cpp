@@ -74,6 +74,8 @@ TEST(CircleTest, BasicTest)
 
     c2 = Circle(30.f);
     ASSERT_TRUE(c1 != c2);
+    c2.SetRadius(200.f);
+    ASSERT_EQ(c2.Radius(), 200.f);
 } 
 
 TEST(CircleTest, PointTest) 
