@@ -15,7 +15,7 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-##########
+# Project Targets
 
 add_library(curves SHARED src/Circle.cpp src/Circle.h src/Ellipse.h src/Ellipse.cpp src/Helix.h src/Helix.cpp src/ICurve.h src/Vec3.h)
 add_executable(sandbox src/main.cpp)
