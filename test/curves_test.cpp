@@ -4,11 +4,12 @@
 #include "Vec3.h"
 #include "Circle.h"
 #include "Ellipse.h"
+#include "Helix.h"
 
 #include <numbers>
 #include <cmath>
 
-auto pi = std::numbers::pi_v<float>;
+constexpr auto pi = std::numbers::pi_v<float>;
 
 auto Vec3f_Near(const Vec3f& expected, float max_abs_error)
 {
@@ -303,6 +304,138 @@ TEST(EllipseTest, DerivativeTest)
                 rx * (std::sqrt(2)/2), 
                 ry * (std::sqrt(2)/2), 
                 0.f
+            ),
+            0.001f
+        )
+    );
+}
+
+TEST(HelixTest, BasicTest)
+{
+    auto def = Helix{};
+    ASSERT_EQ(def.Radius(), 1.f);
+    ASSERT_EQ(def.Step(), 1.f);
+
+    Helix h1(5.f, -2.f);
+    auto h2 = Helix(-5.f, -2.f);
+
+    ASSERT_EQ(h1.Radius(), 5.f);
+    ASSERT_TRUE(h1 == h2);
+    ASSERT_EQ(h1, h2);
+
+    h2 = Helix(7.f, 3.f);
+    ASSERT_TRUE(h1 != h2);
+    h2.SetRadius(5.f);
+    ASSERT_EQ(h2.Radius(), 5.f);
+
+    h1.SetStep(3.f);
+    ASSERT_TRUE(h1 == h2);
+} 
+
+TEST(HelixTest, PointTest) 
+{
+    float rad = 5.f;
+    float step = -2.f;
+    Helix h(rad, step);
+
+    ASSERT_THAT(
+        h.Point(0.f), 
+        Vec3f_Near( 
+            Vec3f(
+                rad, 
+                0.f, 
+                0.f
+            ), 
+            0.001f
+        )
+    );
+    
+    ASSERT_THAT(
+        h.Point(pi * 4.f), 
+        Vec3f_Near( 
+            Vec3f(
+                rad,
+                0.f,
+                2*step
+            ), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        h.Point(pi), 
+        Vec3f_Near( 
+            Vec3f(
+                -rad, 
+                0.f, 
+                0.5f * step
+            ), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        h.Point(-pi / 2.f), 
+        Vec3f_Near( 
+            Vec3f(
+                0.f, 
+                -rad, 
+                -0.25f * step
+            ), 
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        h.Point((4.f*pi) + (4.f*pi / 3.f)), 
+        Vec3f_Near( 
+            Vec3f(
+                rad * (-0.5f), 
+                rad * (-std::sqrt(3)/2.f), 
+                (2.f + 4.f/6.f) * step
+            ), 
+            0.001f
+        )
+    );
+}
+
+TEST(HelixTest, DerivativeTest)
+{
+    float rad = 5.f;
+    float step = -2.f;
+    Helix h(rad, step);
+
+    ASSERT_THAT(
+        h.Derivative(0.f), 
+        Vec3f_Near( 
+            Vec3f(
+                0.f, 
+                rad, 
+                step / (2*pi)
+            ), 
+            0.001f
+        )
+    );
+    
+    ASSERT_THAT(
+        h.Derivative(pi*20.f), 
+        Vec3f_Near( 
+            Vec3f(
+                0.f, 
+                rad, 
+                step / (2*pi)
+            ),
+            0.001f
+        )
+    );
+
+    ASSERT_THAT(
+        h.Derivative(-pi/4.f - pi*100.f), 
+        Vec3f_Near( 
+            Vec3f(
+                rad * (std::sqrt(2)/2), 
+                rad * (std::sqrt(2)/2), 
+                step / (2*pi)
             ),
             0.001f
         )
