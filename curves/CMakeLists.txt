@@ -7,6 +7,7 @@ add_library(curves SHARED
     include/Helix.h 
     include/ICurve.h 
     include/Vec3.h
+    include/curves.h
 )
 
 target_include_directories(curves PRIVATE ${CMAKE_SOURCE_DIR}/curves/include)
