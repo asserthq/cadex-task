@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <memory>
 #include <numbers>
-#include <exception>
+#include <numeric>
 
 #include <curves.h>
 
