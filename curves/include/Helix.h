@@ -12,6 +12,7 @@ public:
 
     virtual Vec3f Point(float t) const override;
     virtual Vec3f Derivative(float t) const override;
+    virtual std::string ToString() const override;
 
     float Step() const { return m_step; }
     void SetStep(float step) { m_step = step; }

@@ -1,5 +1,5 @@
 #include "Circle.h"
-#include <cmath>
+#include <sstream>
 
 Vec3f Circle::Point(float t) const
 {
@@ -17,4 +17,11 @@ Vec3f Circle::Derivative(float t) const
         m_rad * std::cos(t), 
         0.f 
     };
+}
+
+std::string Circle::ToString() const
+{
+    std::stringstream ss;
+    ss << "Circle (rad = " << m_rad << ")";
+    return ss.str(); 
 }

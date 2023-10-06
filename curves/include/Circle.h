@@ -11,6 +11,7 @@ public:
 
     virtual Vec3f Point(float t) const override;
     virtual Vec3f Derivative(float t) const override;
+    virtual std::string ToString() const override;
 
     float Radius() const { return m_rad; }
     void SetRadius(float radius) { m_rad = std::abs(radius); }
