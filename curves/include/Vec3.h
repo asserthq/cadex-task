@@ -1,4 +1,6 @@
 #pragma once
+#include <iostream>
+#include <sstream>
 
 template<class T>
 struct Vec3
@@ -15,3 +17,9 @@ struct Vec3
 
 using Vec3f = Vec3<float>;
 using Vec3d = Vec3<double>;
+
+inline std::ostream& operator<<(std::ostream& os, const Vec3f& vec)
+{
+    os << "(" << vec.x << ", " << vec.y << ", " << vec.z << ")";
+    return os;
+}

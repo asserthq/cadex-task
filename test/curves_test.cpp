@@ -8,6 +8,7 @@
 
 #include <numbers>
 #include <cmath>
+#include <sstream>
 
 constexpr auto pi = std::numbers::pi_v<float>;
 
@@ -62,6 +63,14 @@ TEST(Vec3_Test, CopyTest)
     Vec3f v2(2.f, 2.f, 2.f);
     v2 = v;
     ASSERT_EQ(v, v2);
+}
+
+TEST(Vec3_Test, OstreamOpTest)
+{
+    std::stringstream ss;
+    Vec3f v(1.f, -4.55f, 0.f);
+    ss << v;
+    ASSERT_STREQ(ss.str().c_str(), "(1, -4.55, 0)");
 }
 
 TEST(CircleTest, BasicTest)
