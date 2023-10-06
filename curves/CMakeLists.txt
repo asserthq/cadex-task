@@ -1,4 +1,4 @@
-add_library(curves SHARED 
+add_library(curves STATIC 
     src/Circle.cpp 
     src/Ellipse.cpp 
     src/Helix.cpp 
