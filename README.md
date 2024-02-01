@@ -1,10 +1,5 @@
 # cadex-task
 
-## Clone
-```bash
-$ git clone git@github.com:zdrvzbl/cadex-task.git
-```
-
 ## Build
 ```bash
 $ mkdir build
